@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Burger Craft - Flame Grilled Perfection</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            dark: '#0f0f11',
+                            card: '#18181c',
+                            border: '#2a2a30',
+                            accent: '#f59e0b', // warm gold/amber
+                            accentHover: '#d97706',
+                            crimson: '#e11d48',
+                            lightText: '#e2e8f0',
+                            muted: '#94a3b8'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Outfit', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@600;700;800;900&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0f0f11;
+            color: #e2e8f0;
+        }
+        h1, h2, h3, h4, .font-display {
+            font-family: 'Outfit', sans-serif;
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0f0f11;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2a2a30;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #f59e0b;
+        }
+        .glow-effect {
+            box-shadow: 0 0 25px -5px rgba(245, 158, 11, 0.3);
+        }
+        .glow-card:hover {
+            box-shadow: 0 10px 30px -10px rgba(245, 158, 11, 0.25);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between overflow-x-hidden">
+
+    <!-- NAVBAR -->
+    <header class="sticky top-0 z-40 bg-brand-dark/90 backdrop-blur-md border-b border-brand-border/60 transition-all">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Logo -->
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-accent to-amber-300 flex items-center justify-center text-brand-dark font-black text-xl shadow-lg transform group-hover:rotate-6 transition-transform">
+                    <i class="fa-solid fa-burger"></i>
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-display font-extrabold text-xl tracking-wider text-white">BURGER<span class="text-brand-accent">CRAFT</span></span>
+                    <span class="text-[10px] text-brand-muted tracking-widest uppercase font-semibold">Artisanal Buns & Bites</span>
+                </div>
+            </a>
+
+            <!-- Nav Links -->
+            <nav class="hidden md:flex items-center gap-8 text-sm font-medium">
+                <a href="#hero" class="hover:text-brand-accent transition-colors">Home</a>
+                <a href="#menu" class="hover:text-brand-accent transition-colors">Menu</a>
+                <a href="#story" class="hover:text-brand-accent transition-colors">Our Craft</a>
+                <a href="#contact" class="hover:text-brand-accent transition-colors">Location</a>
+            </nav>
+
+            <!-- Actions -->
+            <div class="flex items-center gap-4">
+                <button onclick="toggleCart()" class="relative p-2.5 rounded-xl bg-brand-card border border-brand-border hover:border-brand-accent/50 text-white transition-all flex items-center justify-center">
+                    <i class="fa-solid fa-cart-shopping text-lg text-brand-accent"></i>
+                    <span id="cart-badge" class="absolute -top-2 -right-2 bg-brand-crimson text-white text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center shadow-md scale-0 transition-transform">0</span>
+                </button>
+                <a href="#menu" class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-brand-accent hover:bg-brand-accentHover text-brand-dark font-bold text-sm transition-all shadow-lg hover:shadow-brand-accent/20">
+                    Order Now <i class="fa-solid fa-arrow-right text-xs"></i>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow">
+        <!-- HERO SECTION -->
+        <section id="hero" class="relative pt-12 pb-20 md:py-28 overflow-hidden">
+            <!-- Background Glows -->
+            <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-brand-accent/10 rounded-full blur-[120px] pointer-events-none"></div>
+            <div class="absolute bottom-10 right-10 w-[300px] h-[300px] bg-brand-crimson/10 rounded-full blur-[100px] pointer-events-none"></div>
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <!-- Hero Content -->
+                    <div class="space-y-6 text-center md:text-left">
+                        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-card border border-brand-border text-brand-accent text-xs font-semibold uppercase tracking-widest">
+                            <i class="fa-solid fa-fire text-brand-accent"></i> 100% Angus Beef & Fresh Ingredients
+                        </div>
+                        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black leading-tight tracking-tight text-white">
+                            Bite Into <br class="hidden sm:block"/>
+                            <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-accent via-amber-300 to-amber-500">Pure Flavor Perfection</span>
+                        </h1>
+                        <p class="text-brand-muted text-base sm:text-lg max-w-xl mx-auto md:mx-0 font-normal">
+                            Handcrafted gourmet burgers smashed to crisp perfection, paired with artisan house sauces, organic brioche buns, and ice-cold craft beverages.
+                        </p>
+                        <div class="flex flex-col sm:flex-row items-center justify-center md:justify-start gap-4 pt-2">
+                            <a href="#menu" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-brand-accent hover:bg-brand-accentHover text-brand-dark font-extrabold text-base transition-all shadow-xl glow-effect text-center">
+                                Explore Menu & Order
+                            </a>
+                            <a href="#story" class="w-full sm:w-auto px-6 py-4 rounded-xl bg-brand-card border border-brand-border hover:border-brand-accent/50 text-white font-semibold text-base transition-all text-center">
+                                Read Our Story
+                            </a>
+                        </div>
+                        
+                        <!-- Badges -->
+                        <div class="pt-6 grid grid-cols-3 gap-4 border-t border-brand-border/60 max-w-md mx-auto md:mx-0">
+                            <div>
+                                <span class="block font-display font-extrabold text-2xl text-white">20+</span>
+                                <span class="text-xs text-brand-muted">Craft Recipes</span>
+                            </div>
+                            <div>
+                                <span class="block font-display font-extrabold text-2xl text-white">15 Min</span>
+                                <span class="text-xs text-brand-muted">Fast Prep</span>
+                            </div>
+                            <div>
+                                <span class="block font-display font-extrabold text-2xl text-white">4.9 ★</span>
+                                <span class="text-xs text-brand-muted">5k+ Reviews</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Hero Visual -->
+                    <div class="relative flex justify-center">
+                        <div class="relative w-full max-w-lg aspect-square rounded-3xl bg-gradient-to-b from-brand-card to-transparent p-4 border border-brand-border/40 flex items-center justify-center">
+                            <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=800&q=80" 
+                                 alt="Signature Bacon Smash Burger" 
+                                 class="w-full h-full object-cover rounded-2xl shadow-2xl transform hover:scale-[1.02] transition-transform duration-500"
+                                 onerror="this.src='https://placehold.co/600x600/18181c/f59e0b?text=Burger+Craft+Special'"
+                            >
+                            <!-- Floating Tag -->
+                            <div class="absolute -bottom-4 -left-4 bg-brand-card border border-brand-border p-4 rounded-2xl shadow-xl flex items-center gap-3 backdrop-blur-md">
+                                <div class="w-10 h-10 rounded-full bg-brand-accent/20 flex items-center justify-center text-brand-accent font-bold">
+                                    <i class="fa-solid fa-award"></i>
+                                </div>
+                                <div>
+                                    <div class="text-xs text-brand-muted">Bestseller</div>
+                                    <div class="text-sm font-bold text-white">Double Bacon Smash</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- MENU SECTION -->
+        <section id="menu" class="py-16 bg-black/40 border-y border-brand-border/40">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <!-- Section Header -->
+                <div class="text-center max-w-3xl mx-auto mb-12">
+                    <span class="text-brand-accent text-xs font-bold uppercase tracking-widest">Handcrafted Menu</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-2">Satisfy Your Craving</h2>
+                    <p class="text-brand-muted mt-3 text-sm sm:text-base">All our burgers feature 100% prime beef ground daily, served on toasted brioche buns with homemade signature sauces.</p>
+                </div>
+
+                <!-- Category Tabs -->
+                <div class="flex justify-center gap-3 mb-10 overflow-x-auto pb-2 scrollbar-none">
+                    <button onclick="filterCategory('all')" id="tab-all" class="menu-tab active-tab px-6 py-2.5 rounded-full text-sm font-bold transition-all bg-brand-accent text-brand-dark">
+                        All Items
+                    </button>
+                    <button onclick="filterCategory('burgers')" id="tab-burgers" class="menu-tab px-6 py-2.5 rounded-full text-sm font-bold transition-all bg-brand-card border border-brand-border text-brand-muted hover:text-white">
+                        <i class="fa-solid fa-burger mr-1.5"></i> Burgers
+                    </button>
+                    <button onclick="filterCategory('sides')" id="tab-sides" class="menu-tab px-6 py-2.5 rounded-full text-sm font-bold transition-all bg-brand-card border border-brand-border text-brand-muted hover:text-white">
+                        <i class="fa-solid fa-bowl-food mr-1.5"></i> Sides
+                    </button>
+                    <button onclick="filterCategory('drinks')" id="tab-drinks" class="menu-tab px-6 py-2.5 rounded-full text-sm font-bold transition-all bg-brand-card border border-brand-border text-brand-muted hover:text-white">
+                        <i class="fa-solid fa-glass-water mr-1.5"></i> Drinks
+                    </button>
+                </div>
+
+                <!-- Menu Items Grid -->
+                <div id="menu-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Populated dynamically via JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- OUR CRAFT / FEATURES -->
+        <section id="story" class="py-20 relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid lg:grid-cols-2 gap-12 items-center">
+                    <div class="space-y-6">
+                        <span class="text-brand-accent text-xs font-bold uppercase tracking-widest">Why Burger Craft?</span>
+                        <h2 class="text-3xl sm:text-4xl font-extrabold text-white">We Don't Shortcut Quality. <br/>Ever.</h2>
+                        <p class="text-brand-muted text-base leading-relaxed">
+                            Founded in 2024, Burger Craft started with a simple obsession: creating the perfect smash burger. We source grass-fed Angus beef locally, bake our brioche buns daily, and craft every pickle and sauce in-house.
+                        </p>
+                        
+                        <div class="space-y-4 pt-2">
+                            <div class="flex items-start gap-4 p-4 rounded-xl bg-brand-card border border-brand-border/60">
+                                <div class="w-10 h-10 rounded-lg bg-brand-accent/20 flex items-center justify-center text-brand-accent shrink-0">
+                                    <i class="fa-solid fa-cow text-lg"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-white text-base">Fresh 100% Angus Beef</h4>
+                                    <p class="text-brand-muted text-xs mt-1">Never frozen, coarsely ground daily for maximum flavor and juiciness.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4 p-4 rounded-xl bg-brand-card border border-brand-border/60">
+                                <div class="w-10 h-10 rounded-lg bg-brand-accent/20 flex items-center justify-center text-brand-accent shrink-0">
+                                    <i class="fa-solid fa-bread-slice text-lg"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-white text-base">Artisan Brioche Buns</h4>
+                                    <p class="text-brand-muted text-xs mt-1">Baked every morning, buttered, and toasted to gold perfection.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <img src="https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=600&q=80" alt="Grill Crafting" class="rounded-2xl border border-brand-border object-cover w-full h-64 shadow-lg" onerror="this.src='https://placehold.co/400x500/18181c/f59e0b?text=Grill+Master'">
+                        <img src="https://images.unsplash.com/photo-1572802419224-296b0aeee0d9?auto=format&fit=crop&w=600&q=80" alt="Delicious Burger" class="rounded-2xl border border-brand-border object-cover w-full h-64 shadow-lg mt-8" onerror="this.src='https://placehold.co/400x500/18181c/f59e0b?text=Gourmet+Bites'">
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER & LOCATION -->
+    <footer id="contact" class="bg-brand-card border-t border-brand-border/80 pt-16 pb-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-10 pb-12 border-b border-brand-border/60">
+                <!-- Brand Info -->
+                <div class="md:col-span-1 space-y-4">
+                    <a href="#" class="flex items-center gap-3">
+                        <div class="w-9 h-9 rounded-xl bg-brand-accent flex items-center justify-center text-brand-dark font-black text-lg">
+                            <i class="fa-solid fa-burger"></i>
+                        </div>
+                        <span class="font-display font-extrabold text-xl tracking-wider text-white">BURGER<span class="text-brand-accent">CRAFT</span></span>
+                    </a>
+                    <p class="text-brand-muted text-xs leading-relaxed">
+                        Handcrafted gourmet burgers smash-grilled to perfection. Real ingredients, real passion.
+                    </p>
+                    <div class="flex gap-3 text-brand-muted">
+                        <a href="#" class="w-8 h-8 rounded-lg bg-brand-dark flex items-center justify-center hover:text-brand-accent hover:border-brand-accent border border-brand-border transition-colors"><i class="fa-brands fa-instagram text-sm"></i></a>
+                        <a href="#" class="w-8 h-8 rounded-lg bg-brand-dark flex items-center justify-center hover:text-brand-accent hover:border-brand-accent border border-brand-border transition-colors"><i class="fa-brands fa-facebook-f text-sm"></i></a>
+                        <a href="#" class="w-8 h-8 rounded-lg bg-brand-dark flex items-center justify-center hover:text-brand-accent hover:border-brand-accent border border-brand-border transition-colors"><i class="fa-brands fa-x-twitter text-sm"></i></a>
+                    </div>
+                </div>
+
+                <!-- Hours -->
+                <div>
+                    <h4 class="font-display font-bold text-white text-sm uppercase tracking-wider mb-4">Opening Hours</h4>
+                    <ul class="space-y-2 text-xs text-brand-muted">
+                        <li class="flex justify-between"><span class="text-white">Mon - Thu:</span> 11:00 AM - 10:00 PM</li>
+                        <li class="flex justify-between"><span class="text-white">Fri - Sat:</span> 11:00 AM - 11:30 PM</li>
+                        <li class="flex justify-between"><span class="text-white">Sunday:</span> 12:00 PM - 09:30 PM</li>
+                    </ul>
+                </div>
+
+                <!-- Location -->
+                <div>
+                    <h4 class="font-display font-bold text-white text-sm uppercase tracking-wider mb-4">Visit Us</h4>
+                    <p class="text-xs text-brand-muted leading-relaxed">
+                        <i class="fa-solid fa-location-dot text-brand-accent mr-1.5"></i> 142 Gourmet Avenue, Foodie District<br/>New York, NY 10012
+                    </p>
+                    <p class="text-xs text-brand-muted mt-2">
+                        <i class="fa-solid fa-phone text-brand-accent mr-1.5"></i> (555) 234-5678
+                    </p>
+                </div>
+
+                <!-- Newsletter -->
+                <div>
+                    <h4 class="font-display font-bold text-white text-sm uppercase tracking-wider mb-4">Get Secret Offers</h4>
+                    <p class="text-xs text-brand-muted mb-3">Subscribe for limited-time secret burgers and promos.</p>
+                    <form onsubmit="event.preventDefault(); showToast('Subscribed successfully!');" class="space-y-2">
+                        <input type="email" placeholder="Your email address" required class="w-full px-3 py-2 text-xs rounded-lg bg-brand-dark border border-brand-border text-white focus:outline-none focus:border-brand-accent">
+                        <button type="submit" class="w-full py-2 bg-brand-accent hover:bg-brand-accentHover text-brand-dark font-bold text-xs rounded-lg transition-all">Join Club</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-brand-muted gap-4">
+                <p>&copy; 2026 Burger Craft Inc. All rights reserved.</p>
+                <div class="flex gap-6">
+                    <a href="#" class="hover:underline">Privacy Policy</a>
+                    <a href="#" class="hover:underline">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- SHOPPING CART DRAWER (SLIDE OVER) -->
+    <div id="cart-drawer" class="fixed inset-0 z-50 pointer-events-none transition-opacity duration-300 opacity-0">
+        <!-- Backdrop -->
+        <div id="cart-backdrop" onclick="toggleCart()" class="absolute inset-0 bg-black/70 backdrop-blur-sm cursor-pointer"></div>
+
+        <!-- Content Box -->
+        <div id="cart-content" class="absolute top-0 right-0 bottom-0 w-full max-w-md bg-brand-card border-l border-brand-border p-6 flex flex-col justify-between transform translate-x-full transition-transform duration-300 pointer-events-auto">
+            <!-- Cart Header -->
+            <div>
+                <div class="flex items-center justify-between border-b border-brand-border/60 pb-4">
+                    <div class="flex items-center gap-2">
+                        <i class="fa-solid fa-bag-shopping text-brand-accent text-xl"></i>
+                        <h3 class="font-display font-bold text-xl text-white">Your Order</h3>
+                    </div>
+                    <button onclick="toggleCart()" class="text-brand-muted hover:text-white text-lg p-2">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+
+                <!-- Cart Items List -->
+                <div id="cart-items-container" class="mt-6 space-y-4 max-h-[55vh] overflow-y-auto pr-1">
+                    <!-- Dynamic cart items -->
+                </div>
+            </div>
+
+            <!-- Cart Footer Summary -->
+            <div class="border-t border-brand-border/60 pt-4 space-y-4">
+                <div class="space-y-2 text-sm">
+                    <div class="flex justify-between text-brand-muted">
+                        <span>Subtotal</span>
+                        <span id="cart-subtotal" class="text-white">$0.00</span>
+                    </div>
+                    <div class="flex justify-between text-brand-muted">
+                        <span>Tax (8%)</span>
+                        <span id="cart-tax" class="text-white">$0.00</span>
+                    </div>
+                    <div class="flex justify-between text-lg font-bold text-white pt-2 border-t border-brand-border/40">
+                        <span>Total</span>
+                        <span id="cart-total" class="text-brand-accent">$0.00</span>
+                    </div>
+                </div>
+
+                <button onclick="openCheckoutModal()" id="checkout-btn" disabled class="w-full py-3.5 rounded-xl bg-brand-accent disabled:opacity-50 disabled:cursor-not-allowed hover:bg-brand-accentHover text-brand-dark font-extrabold text-base transition-all shadow-lg">
+                    Proceed to Checkout
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- CHECKOUT CONFIRMATION MODAL -->
+    <div id="checkout-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
+        <div class="bg-brand-card border border-brand-border rounded-2xl max-w-md w-full p-6 space-y-6 text-center animate-in fade-in zoom-in-95 duration-200">
+            <div class="w-16 h-16 rounded-full bg-brand-accent/20 text-brand-accent mx-auto flex items-center justify-center text-3xl">
+                <i class="fa-solid fa-circle-check"></i>
+            </div>
+            
+            <div class="space-y-2">
+                <h3 class="font-display font-black text-2xl text-white">Order Confirmed!</h3>
+                <p class="text-xs text-brand-muted">Thank you for dining with Burger Craft. Your order is being freshly smashed!</p>
+            </div>
+
+            <div class="bg-brand-dark p-4 rounded-xl text-left border border-brand-border/60 space-y-2 text-xs">
+                <div class="flex justify-between"><span class="text-brand-muted">Order Number:</span> <span class="text-white font-mono font-bold" id="order-id">#BC-8492</span></div>
+                <div class="flex justify-between"><span class="text-brand-muted">Estimated Prep Time:</span> <span class="text-brand-accent font-bold">15 - 20 Mins</span></div>
+                <div class="flex justify-between border-t border-brand-border/40 pt-2"><span class="text-brand-muted">Total Paid:</span> <span class="text-white font-bold" id="modal-paid-amount">$0.00</span></div>
+            </div>
+
+            <button onclick="closeCheckoutModal()" class="w-full py-3 rounded-xl bg-brand-accent hover:bg-brand-accentHover text-brand-dark font-bold text-sm transition-all">
+                Back to Home
+            </button>
+        </div>
+    </div>
+
+    <!-- TOAST NOTIFICATION -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 bg-brand-card border border-brand-accent text-white px-4 py-3 rounded-xl shadow-2xl flex items-center gap-3 transform translate-y-20 opacity-0 transition-all duration-300">
+        <i class="fa-solid fa-circle-info text-brand-accent"></i>
+        <span id="toast-message" class="text-xs font-semibold">Notification</span>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // MENU DATA
+        const menuItems = [
+            {
+                id: 1,
+                name: "Classic Cheeseburger",
+                category: "burgers",
+                price: 9.99,
+                desc: "Single prime Angus beef patty, American cheddar, caramelized onions, pickles, house sauce.",
+                image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=600&q=80"
+            },
+            {
+                id: 2,
+                name: "Double Bacon Smash",
+                category: "burgers",
+                price: 13.49,
+                desc: "Two crispy smash patties, smoked bacon, double cheddar, crispy onions, BBQ glaze.",
+                image: "https://images.unsplash.com/photo-1553979459-d2229ba7433b?auto=format&fit=crop&w=600&q=80"
+            },
+            {
+                id: 3,
+                name: "Spicy Jalapeño Crunch",
+                category: "burgers",
+                price: 11.99,
+                desc: "Angus patty, pepper jack cheese, fresh jalapeños, habanero mayo, spicy tortilla crisp.",
+                image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?auto=format&fit=crop&w=600&q=80"
+            },
+            {
+                id: 4,
+                name: "Veggie Delight",
+                category: "burgers",
+                price: 10.99,
+                desc: "House-made black bean & quinoa patty, avocado, arugula, tomato, garlic aioli.",
+                image: "https://images.unsplash.com/photo-1520072959219-c595dc870360?auto=format&fit=crop&w=600&q=80"
+            },
+            {
+                id: 5,
+                name: "Crispy Chicken Club",
+                category: "burgers",
+                price: 11.49,
+                desc: "Buttermilk fried chicken breast, bacon, Swiss cheese, honey mustard, fresh lettuce.",
+                image: "https://images.unsplash.com/photo-1625813506062-0aeb1d7a094b?auto=format&fit=crop&w=600&q=80"
+            },
+            {
+                id: 6,
+                name: "Truffle Parmesan Fries",
+                category: "sides",
+                price: 5.99,
+                desc: "Hand-cut fries tossed with black truffle oil, fresh parsley, and aged parmesan.",
+                image: "https://images.unsplash.com/photo-1576107232684-1279f3908594?auto=format&fit=crop&w=600&q=80"
+            },
+            {
+                id: 7,
+                name: "Loaded Bacon Cheese Fries",
+                category: "sides",
+                price: 6.99,
+                desc: "Golden fries smothered in warm cheddar sauce, chopped bacon, and scallions.",
+                image: "https://images.unsplash.com/photo-1541592106381-b31e9677c0e5?auto=format&fit=crop&w=600&q=80"
+            },
+            {
+                id: 8,
+                name: "Craft Vanilla Shake",
+                category: "drinks",
+                price: 4.99,
+                desc: "Hand-spun Madagascar vanilla bean milkshake topped with whipped cream.",
+                image: "https://images.unsplash.com/photo-1572490122747-3968b75cc699?auto=format&fit=crop&w=600&q=80"
+            },
+            {
+                id: 9,
+                name: "House Brewed Iced Tea",
+                category: "drinks",
+                price: 2.99,
+                desc: "Freshly brewed lemon iced tea with mint leaves.",
+                image: "https://images.unsplash.com/photo-1556679343-c7306c1976bc?auto=format&fit=crop&w=600&q=80"
+            }
+        ];
+
+        // CART STATE
+        let cart = [];
+
+        // RENDER MENU
+        function renderMenu(category = 'all') {
+            const container = document.getElementById('menu-grid');
+            container.innerHTML = '';
+
+            const filteredItems = category === 'all' 
+                ? menuItems 
+                : menuItems.filter(item => item.category === category);
+
+            filteredItems.forEach(item => {
+                const card = document.createElement('div');
+                card.className = "bg-brand-card border border-brand-border rounded-2xl p-4 flex flex-col justify-between glow-card transition-all duration-300";
+                card.innerHTML = `
+                    <div>
+                        <div class="relative w-full h-48 rounded-xl overflow-hidden mb-4 bg-brand-dark">
+                            <img src="${item.image}" alt="${item.name}" class="w-full h-full object-cover transform hover:scale-105 transition-transform duration-300" onerror="this.src='https://placehold.co/400x300/18181c/f59e0b?text=${encodeURIComponent(item.name)}'">
+                            <span class="absolute top-3 right-3 bg-brand-dark/90 text-brand-accent text-xs font-bold px-3 py-1 rounded-full border border-brand-border">$${item.price.toFixed(2)}</span>
+                        </div>
+                        <h3 class="font-display font-bold text-lg text-white">${item.name}</h3>
+                        <p class="text-brand-muted text-xs mt-1 leading-relaxed line-clamp-2">${item.desc}</p>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-brand-border/60 flex items-center justify-between">
+                        <span class="text-xs uppercase tracking-wider font-semibold text-brand-muted">${item.category}</span>
+                        <button onclick="addToCart(${item.id})" class="px-4 py-2 rounded-lg bg-brand-accent hover:bg-brand-accentHover text-brand-dark font-bold text-xs transition-all flex items-center gap-1.5">
+                            <i class="fa-solid fa-plus text-xs"></i> Add to Cart
+                        </button>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        // CATEGORY FILTER TAB TOGGLE
+        function filterCategory(category) {
+            document.querySelectorAll('.menu-tab').forEach(tab => {
+                tab.className = "menu-tab px-6 py-2.5 rounded-full text-sm font-bold transition-all bg-brand-card border border-brand-border text-brand-muted hover:text-white";
+            });
+            
+            const activeTab = document.getElementById(`tab-${category}`);
+            if (activeTab) {
+                activeTab.className = "menu-tab active-tab px-6 py-2.5 rounded-full text-sm font-bold transition-all bg-brand-accent text-brand-dark";
+            }
+
+            renderMenu(category);
+        }
+
+        // CART OPERATIONS
+        function addToCart(id) {
+            const item = menuItems.find(i => i.id === id);
+            const existing = cart.find(i => i.id === id);
+
+            if (existing) {
+                existing.quantity += 1;
+            } else {
+                cart.push({ ...item, quantity: 1 });
+            }
+
+            updateCartUI();
+            showToast(`Added "${item.name}" to cart!`);
+        }
+
+        function changeQuantity(id, delta) {
+            const index = cart.findIndex(i => i.id === id);
+            if (index !== -1) {
+                cart[index].quantity += delta;
+                if (cart[index].quantity <= 0) {
+                    cart.splice(index, 1);
+                }
+            }
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            const container = document.getElementById('cart-items-container');
+            const badge = document.getElementById('cart-badge');
+            const subtotalEl = document.getElementById('cart-subtotal');
+            const taxEl = document.getElementById('cart-tax');
+            const totalEl = document.getElementById('cart-total');
+            const checkoutBtn = document.getElementById('checkout-btn');
+
+            // Total Count
+            const totalCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+            badge.innerText = totalCount;
+            if (totalCount > 0) {
+                badge.classList.remove('scale-0');
+            } else {
+                badge.classList.add('scale-0');
+            }
+
+            // Empty Cart View
+            if (cart.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-12 text-brand-muted">
+                        <i class="fa-solid fa-basket-shopping text-4xl mb-3 opacity-40"></i>
+                        <p class="text-sm font-medium">Your cart is completely empty.</p>
+                        <p class="text-xs mt-1">Add some tasty burgers to get started!</p>
+                    </div>
+                `;
+                subtotalEl.innerText = "$0.00";
+                taxEl.innerText = "$0.00";
+                totalEl.innerText = "$0.00";
+                checkoutBtn.disabled = true;
+                return;
+            }
+
+            // Render Items
+            container.innerHTML = '';
+            let subtotal = 0;
+
+            cart.forEach(item => {
+                const itemTotal = item.price * item.quantity;
+                subtotal += itemTotal;
+
+                const div = document.createElement('div');
+                div.className = "flex items-center gap-3 p-3 rounded-xl bg-brand-dark border border-brand-border/60";
+                div.innerHTML = `
+                    <img src="${item.image}" alt="${item.name}" class="w-14 h-14 rounded-lg object-cover" onerror="this.src='https://placehold.co/100x100/18181c/f59e0b?text=Item'">
+                    <div class="flex-grow">
+                        <h4 class="font-bold text-xs text-white">${item.name}</h4>
+                        <div class="text-xs text-brand-accent font-semibold mt-0.5">$${item.price.toFixed(2)}</div>
+                    </div>
+                    <div class="flex items-center gap-2 bg-brand-card px-2 py-1 rounded-lg border border-brand-border">
+                        <button onclick="changeQuantity(${item.id}, -1)" class="text-brand-muted hover:text-white px-1">-</button>
+                        <span class="text-xs font-bold text-white w-4 text-center">${item.quantity}</span>
+                        <button onclick="changeQuantity(${item.id}, 1)" class="text-brand-muted hover:text-white px-1">+</button>
+                    </div>
+                `;
+                container.appendChild(div);
+            });
+
+            const tax = subtotal * 0.08;
+            const total = subtotal + tax;
+
+            subtotalEl.innerText = `$${subtotal.toFixed(2)}`;
+            taxEl.innerText = `$${tax.toFixed(2)}`;
+            totalEl.innerText = `$${total.toFixed(2)}`;
+            checkoutBtn.disabled = false;
+        }
+
+        // TOGGLE CART DRAWER
+        function toggleCart() {
+            const drawer = document.getElementById('cart-drawer');
+            const content = document.getElementById('cart-content');
+
+            if (drawer.classList.contains('opacity-0')) {
+                drawer.classList.remove('opacity-0', 'pointer-events-none');
+                content.classList.remove('translate-x-full');
+            } else {
+                content.classList.add('translate-x-full');
+                setTimeout(() => {
+                    drawer.classList.add('opacity-0', 'pointer-events-none');
+                }, 300);
+            }
+        }
+
+        // CHECKOUT MODAL
+        function openCheckoutModal() {
+            if (cart.length === 0) return;
+
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            const total = subtotal * 1.08;
+
+            document.getElementById('modal-paid-amount').innerText = `$${total.toFixed(2)}`;
+            document.getElementById('order-id').innerText = `#BC-${Math.floor(1000 + Math.random() * 9000)}`;
+
+            toggleCart(); // close drawer
+            
+            const modal = document.getElementById('checkout-modal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeCheckoutModal() {
+            const modal = document.getElementById('checkout-modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+            
+            // Clear cart
+            cart = [];
+            updateCartUI();
+        }
+
+        // TOAST NOTIFICATIONS
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const msgEl = document.getElementById('toast-message');
+            
+            msgEl.innerText = message;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 2500);
+        }
+
+        // INITIALIZE ON LOAD
+        window.onload = function() {
+            renderMenu('all');
+            updateCartUI();
+        };
+    </script>
+</body>
+</html>
